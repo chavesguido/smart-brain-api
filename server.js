@@ -22,7 +22,7 @@ const image = require ('./controllers/image.js');
 const dbProd = {
 	client: 'pg',
 	connection: {
-		host: process.env.DATABASE_URL,
+		connectionString: process.env.DATABASE_URL,
 		ssl: true
 	}
 };
