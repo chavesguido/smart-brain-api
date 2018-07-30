@@ -9,7 +9,7 @@ const signin = require('./controllers/signin.js');
 const profile = require('./controllers/profile.js');
 const image = require ('./controllers/image.js');
 
-// const dbLocal = {
+// const dbLocal = knex({
 // 	client: 'pg',
 // 	connection: {
 // 		host: '127.0.0.1',
@@ -17,17 +17,15 @@ const image = require ('./controllers/image.js');
 // 		password: 'm2laks9e1',
 // 		database: 'smart-brain'
 // 	}
-// }
+// });
 
-const dbProd = {
+const db = knex({
 	client: 'pg',
 	connection: {
 		connectionString: process.env.DATABASE_URL,
 		ssl: true
 	}
-};
-
-const db = knex({dbProd});
+});
 
 const app = express();
 app.use(bodyParser.json());
