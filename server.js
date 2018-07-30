@@ -9,31 +9,35 @@ const signin = require('./controllers/signin.js');
 const profile = require('./controllers/profile.js');
 const image = require ('./controllers/image.js');
 
-const db = knex({
+// const dbLocal = {
+// 	client: 'pg',
+// 	connection: {
+// 		host: '127.0.0.1',
+// 		user: 'postgres',
+// 		password: 'm2laks9e1',
+// 		database: 'smart-brain'
+// 	}
+// }
+
+const dbProd = {
 	client: 'pg',
 	connection: {
-		host: '127.0.0.1',
-		user: 'postgres',
-		password: 'm2laks9e1',
-		database: 'smart-brain'
+		host: process.env.DATABASE_URL,
+		ssl: true
 	}
-});
+};
+
+const db = knex({dbProd});
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
-if(PORT){
-	app.listen(process.env.PORT , () => {
-		console.log(`server levantado en puerto ${PORT}`);
-	})
-} else {
-	app.listen(3000 , () => {
-		console.log('server levantado en puerto 3000');
-	})
-}
+app.listen(PORT , () => {
+	console.log(`server levantado en puerto ${PORT}`);
+})
 
 app.get('/', (req, res) => { res.json('working!') })
 
