@@ -23,9 +23,17 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-app.listen(3000, () => {
-	console.log('server levantado en puerto 3000');
-})
+const PORT = process.env.PORT;
+
+if(PORT){
+	app.listen(process.env.PORT , () => {
+		console.log(`server levantado en puerto ${PORT}`);
+	})
+} else {
+	app.listen(3000 , () => {
+		console.log('server levantado en puerto 3000');
+	})
+}
 
 app.get('/', (req, res) => { res.json(database.users) })
 
