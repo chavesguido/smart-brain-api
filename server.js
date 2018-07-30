@@ -35,7 +35,7 @@ if(PORT){
 	})
 }
 
-app.get('/', (req, res) => { res.json(database.users) })
+app.get('/', (req, res) => { res.json('working!') })
 
 app.put('/image', (req, res) => { image.handleImage(req, res, db)})
 app.post('/imageurl', (req, res) => { image.handleApiCall(req, res)})
